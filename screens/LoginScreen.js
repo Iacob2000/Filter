@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
+import { Button, View } from 'react-native'
 
-export class LoginScreen extends Component {
-    render() {
+ const LoginScreen = (props) => {
+    
         return (
-            <div>
-                LoginScreen
-            </div>
+            <View>
+                <Button title= 'Login' onPress = {() => {
+                    props.navigation.navigate({routeName : 'Home'});
+                }}/>
+               
+                 <Button title= 'Register'
+               />
+            </View>
         )
     }
-}
+  
+    export default LoginScreen;
 
-export default LoginScreen
