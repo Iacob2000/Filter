@@ -6,10 +6,13 @@ import { Button, View } from 'react-native'
         return (
             <View>
                 <Button title= 'Login' onPress = {() => {
-                    props.navigation.navigate({routeName : 'Home'});
+                    props.navigation.navigate({routeName : 'Profile'});
                 }}/>
                
-                 <Button title= 'Register'
+                 <Button title= 'Register' onPress = {() => {
+                    props.navigation.navigate({routeName : 'Register'});
+                }}
+                 
                />
             </View>
         )

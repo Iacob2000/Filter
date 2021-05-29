@@ -1,10 +1,14 @@
-import React from 'react'
+import React from 'react';
+import {View,Button} from 'react-native';
 
 function FilterScreen() {
     return (
-        <div>
-            FilterScreen
-        </div>
+        <View>
+        <Button title= 'Search' onPress = {() => {
+     props.navigation.navigate({routeName : 'Result'});
+ }}/>
+
+ </View>
     )
 }
 

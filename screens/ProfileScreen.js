@@ -1,10 +1,18 @@
-import React from 'react'
+import React from 'react';
+import {View,Button} from 'react-native';
 
-function ProfileScreen() {
+function ProfileScreen(props) {
     return (
-        <div>
-            ProfileScreen
-        </div>
+        <View>
+     
+     <Button title= 'Home' onPress = {() => {
+            props.navigation.navigate({routeName : 'Home'});
+        }}/>
+       
+         
+      
+    </View>
+        
     )
 }
 

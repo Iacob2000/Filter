@@ -1,10 +1,14 @@
-import React from 'react'
+import React from 'react';
+import {View,Button} from 'react-native';
 
-function PostScreen() {
+function PostScreen(props) {
     return (
-        <div>
-            PostScreen
-        </div>
+        <View>
+        <Button title= 'Home' onPress = {() => {
+     props.navigation.navigate({routeName : 'Home'});
+ }}/>
+
+ </View>
     )
 }
 

@@ -1,10 +1,16 @@
 import React from 'react'
-
-function ResultsScreen() {
+import {View,Button} from 'react-native';
+function ResultsScreen(props) {
     return (
-        <div>
-           ResultsScreen 
-        </div>
+        <View>
+        <Button title= 'Home' onPress = {() => {
+     props.navigation.navigate({routeName : 'Home'});
+ }}/> 
+          <Button title= 'Chat' onPress = {() => {
+     props.navigation.navigate({routeName : 'Chat'});
+ }}/>
+
+ </View>
     )
 }
 

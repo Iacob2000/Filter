@@ -1,10 +1,16 @@
 import React from 'react'
-import { View ,Text} from 'react-native'
+import { View ,Button} from 'react-native'
 
-function HomeScreen() {
+function HomeScreen(props) {
     return (
         <View>
-            
+               <Button title= 'Search' onPress = {() => {
+            props.navigation.navigate({routeName : 'Result'});
+        }}/>
+           <Button title= 'Post' onPress = {() => {
+            props.navigation.navigate({routeName : 'Post'});
+        }}/>
+       
             
         </View>
     )
