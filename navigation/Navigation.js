@@ -8,6 +8,7 @@ import PostScreen from '../screens/PostScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import ResultsScreen from '../screens/ResultsScreen';
+import AnotherProfile from '../screens/AnotherProfile'
 
 import { createAppContainer} from 'react-navigation'
 
@@ -21,7 +22,8 @@ const FilterNavigation = createStackNavigator({
     Post : PostScreen,
     Profile : ProfileScreen,
     Register : RegisterScreen,
-    Result : ResultsScreen
+    Result : ResultsScreen, 
+    User   : AnotherProfile
 });
 
 export default createAppContainer( FilterNavigation);

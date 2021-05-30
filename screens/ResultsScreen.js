@@ -9,6 +9,9 @@ function ResultsScreen(props) {
           <Button title= 'Chat' onPress = {() => {
      props.navigation.navigate({routeName : 'Chat'});
  }}/>
+ <Button title= 'Go to user profile' onPress = {() => {
+     props.navigation.navigate({routeName : 'User'});
+ }}/>
 
  </View>
     )
