@@ -1,26 +1,30 @@
 import React, { Component } from 'react'
-import { Button, View ,TextInput} from 'react-native'
+import { Button, View ,TextInput} from 'react-native';
+import firebase from 'firebase'
 
  export class LoginScreen extends Component {
     constructor(props) {
         super(props);
-     this.state = {
-       name:'',  
+     this.state = { 
        email :'',
        password:'',
      }
      this.onSignUp=this.onSignUp.bind(this)
     }
     onSignUp(){
-     
+     const {email,password} = this.state;
+     firebase.auth().createUserWithEmailAndPassword(email,password)
+     .then((result) =>{
+         console.log(result);
+     })
+     .catch((error) =>{
+        console.log(error);
+    })
     }
     render(){
         return (
             <View>
-                <TextInput  
-                placeholder='name'
-                onChangeText ={(name)=> this.setState({name})}
-                />
+                
                 <TextInput  
                 placeholder='email'
                 onChangeText ={(email)=> this.setState({email})}
@@ -31,12 +35,13 @@ import { Button, View ,TextInput} from 'react-native'
                 onChangeText ={(password)=> this.setState({password})}
                 />
                 <Button title= 'Login' onPress = {() => {
-                    this.onSignUp()
-                    props.navigation.navigate({routeName : 'Profile'});
+                   
+                    this.props.navigation.navigate({routeName : 'Profile'});
                 }}/>
                
                  <Button title= 'Register' onPress = {() => {
-                    props.navigation.navigate({routeName : 'Register'});
+                      this.onSignUp()
+                    this.props.navigation.navigate({routeName : 'Register'});
                 }}
                  
                />
