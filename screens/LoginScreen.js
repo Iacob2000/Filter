@@ -13,9 +13,9 @@ import firebase from 'firebase'
     }
     onSignUp(){
      const {email,password} = this.state;
-     firebase.auth().createUserWithEmailAndPassword(email,password)
+     firebase.auth().signInWithEmailAndPassword(email,password)
      .then((result) =>{
-         console.log(result);
+         console.log('login');
      })
      .catch((error) =>{
         console.log(error);
@@ -35,12 +35,12 @@ import firebase from 'firebase'
                 onChangeText ={(password)=> this.setState({password})}
                 />
                 <Button title= 'Login' onPress = {() => {
-                   
+                     this.onSignUp()
                     this.props.navigation.navigate({routeName : 'Profile'});
                 }}/>
                
                  <Button title= 'Register' onPress = {() => {
-                      this.onSignUp()
+                      
                     this.props.navigation.navigate({routeName : 'Register'});
                 }}
                  

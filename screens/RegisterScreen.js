@@ -14,7 +14,7 @@ import firebase from 'firebase'
     }
     onSignUp(){
      const {name,email,password} = this.state;
-     firebase.auth().signInWithEmailAndPassword(email,password)
+     firebase.auth().createUserWithEmailAndPassword(email,password)
      .then((result) =>{
          console.log(result);
      })

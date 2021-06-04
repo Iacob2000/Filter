@@ -1,9 +1,10 @@
+
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as firebase from 'firebase';
 const firebaseConfig = {
-  apiKey: "AIzaSyDVmxkixWDPbyx1hgLed7yuUkurrxMf0Tk",
+  apiKey: "AIzaSyBrDXBWu2QL-vKikTJ2Wa0_zuOb98-0Ot8",
   authDomain: "filter-app-32ed4.firebaseapp.com",
   projectId: "filter-app-32ed4",
   storageBucket: "filter-app-32ed4.appspot.com",
@@ -12,6 +13,7 @@ const firebaseConfig = {
   measurementId: "G-W21YM91B45"
 };
 firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
 
 
 import LoginScreen from './screens/LoginScreen';
