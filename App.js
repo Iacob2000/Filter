@@ -26,6 +26,7 @@ var db = firebase.firestore();
 
 import LoginScreen from './screens/LoginScreen';
 import FilterNavigation from './navigation/Navigation'
+import { NavigationContainer } from '@react-navigation/native';
 
 export default class App extends Component {
   constructor(props){
@@ -61,17 +62,22 @@ componentDidMount(){
     if(!loggedIn){
       
       return(
-        <FilterNavigation />
+    
+        <ProfileScreen/>
+      
         )
       }
       return(
+      
         <Provider store={store}>
-           <ProfileScreen/>
-        </Provider>
+          <NavigationContainer>
+          <FilterNavigation/>
+          </NavigationContainer>
+       </Provider>
       )
       }
-    
 }
+
 
 const styles = StyleSheet.create({
   container: {
