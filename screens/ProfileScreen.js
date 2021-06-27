@@ -5,14 +5,11 @@ import {bindActionCreators} from 'redux';
 import {fetchUser} from '../redux/actions/index';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen';
-import PostScreen  from './PostScreen';
+import CameraScreen  from './CameraScreen';
 import MaterialCommunityIcons from'react-native-vector-icons/MaterialCommunityIcons'
 
-const Tab = createBottomTabNavigator();
 
-const EmptyScrenn= () => {
-  return (null);
-}
+const Tab = createBottomTabNavigator();
 export class ProfileScreen extends Component {
     componentDidMount() {
         this.props.fetchUser();
@@ -21,22 +18,27 @@ export class ProfileScreen extends Component {
     render(){
   
         return (
-         
-            <Tab.Navigator initialRouteName ="Profile">
+        
+            <Tab.Navigator initialRouteName="Home" labeled={false}>
               <Tab.Screen name="Home" component= {HomeScreen}
-              
-            
+               listeners= {({navigation}) =>({
+                tabPress: event =>{
+                  event.preventDefault();
+                  navigation.navigate("Home")
+                }
+              })}
               options={{
                 tabBarIcon:({color,size}) =>(
                   <MaterialCommunityIcons name ='home' color ={color} size={26}/>
                 )
               }}
               />
-              <Tab.Screen name="Post" component={PostScreen} 
+        
+        <Tab.Screen name="Camera" component={CameraScreen} 
               listeners= {({navigation}) =>({
               tabPress: event =>{
                 event.preventDefault();
-                navigation.navigate("Post")
+                navigation.navigate("Camera")
               }
             })}
               options={{
@@ -46,13 +48,12 @@ export class ProfileScreen extends Component {
               }}
           />
               
-              
             </Tab.Navigator>
-          
+             
     )
     }
  
-        
+   
 }
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser

@@ -30,7 +30,7 @@ import firebase from 'firebase'
     }
     render(){
         return (
-            <View>
+            <View style={{top:'50%',alignSelf:'center'}}>
                 <TextInput  
                 placeholder='name'
                 onChangeText ={(name)=> this.setState({name})}

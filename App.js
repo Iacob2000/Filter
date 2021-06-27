@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import ProfileScreen from './screens/ProfileScreen';
+import HomeScreen  from './screens/HomeScreen';
 import{Provider} from 'react-redux';
 import {createStore,applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
@@ -20,13 +21,16 @@ const firebaseConfig = {
   measurementId: "G-W21YM91B45"
 };
 
-firebase.initializeApp(firebaseConfig);
-var db = firebase.firestore();
-
-
-import FilterNavigation from './navigation/Navigation'
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig)
+}
 import { NavigationContainer } from '@react-navigation/native';
-
+import { createStackNavigator } from '@react-navigation/stack';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import CameraScreen from './screens/CameraScreen';
+import PostScreen from './screens/PostScreen';
+const Stack =createStackNavigator();
 export default class App extends Component {
   constructor(props){
     super(props)
@@ -59,28 +63,38 @@ componentDidMount(){
     )
     }
     if(!loggedIn){
-      
       return(
-    <Provider store={store}>
-      <NavigationContainer>
-      <ProfileScreen/>
+          
+        
+        
+               <NavigationContainer>
+               <Stack.Navigator initialRouteName='Login'>
+                  <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }}/>
+                  <Stack.Screen name='Register' component={RegisterScreen}/>
+               </Stack.Navigator>
+               </NavigationContainer>
+       
+           )
+          }
+           return(
+           <Provider store={store}>
+          <NavigationContainer >
+          <Stack.Navigator initialRouteName='Profile'>
+          <Stack.Screen name='Login' component={LoginScreen}/>
+          <Stack.Screen name='Profile' component={ProfileScreen}/>
+          <Stack.Screen name='Camera' component={CameraScreen}/>
+          <Stack.Screen name='Post' component={PostScreen}/>
+          <Stack.Screen name='Home' component={HomeScreen}/>
 
-      </NavigationContainer>
-
-    </Provider>
-      
-        )
-      }
-      return(
-      
-        <Provider store={store}>
-          <NavigationContainer>
-          <FilterNavigation/>
+          </Stack.Navigator>  
           </NavigationContainer>
-       </Provider>
-      )
-      }
-}
+    
+        </Provider>
+          
+          )
+        }
+    
+  }
 
 
 const styles = StyleSheet.create({

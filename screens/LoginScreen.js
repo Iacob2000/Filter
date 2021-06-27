@@ -23,7 +23,7 @@ import firebase from 'firebase'
     }
     render(){
         return (
-            <View>
+            <View style={{top:'50%',alignSelf:'center'}}>
                 
                 <TextInput  
                 placeholder='email'
@@ -36,12 +36,12 @@ import firebase from 'firebase'
                 />
                 <Button title= 'Login' onPress = {() => {
                      this.onSignUp()
-                    this.props.navigation.navigate({routeName : 'Profile'});
+                   
                 }}/>
                
                  <Button title= 'Register' onPress = {() => {
                       
-                    this.props.navigation.navigate({routeName : 'Register'});
+                    
                 }}
                  
                />
