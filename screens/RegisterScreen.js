@@ -51,7 +51,7 @@ import firebase from 'firebase'
                
                  <Button title= 'Register' onPress = {() => {
                       this.onSignUp()
-                    this.props.navigation.navigate({routeName : 'Register'});
+                    this.props.navigation.navigate({routeName : 'Profile'});
                 }}
                  
                />

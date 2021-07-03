@@ -4,9 +4,9 @@ import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 
 import PostScreen  from './PostScreen';
-import { CommonActions } from '@react-navigation/native';
+import { CommonActions, NavigationContainer } from '@react-navigation/native';
 
-export default function CameraScreen() {
+export default function CameraScreen({navigation}) {
   const [hasGaleryPermission, setHasGaleryPermission] = useState(null);
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [camera, setCamera] = useState(null);
@@ -74,7 +74,7 @@ export default function CameraScreen() {
         
       </Button>
       <Button title = "Take a picture" onPress = {() => takePicture()}/>
-      <Button  title = "Post"/>
+      <Button  title = "Post" onPress = {() => navigation.navigate('Post',{image})}/>
       <Button title = "Pick a picture from galery " onPress = {() => pickImage()}/>
       {image && <Image source={{uri:image}} style ={{flex:1}}/>}
     </View>

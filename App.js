@@ -12,13 +12,13 @@ const store = createStore(rootReducer,applyMiddleware(thunk))
 
 import * as firebase from 'firebase';
 const firebaseConfig = {
-  apiKey: "AIzaSyBrDXBWu2QL-vKikTJ2Wa0_zuOb98-0Ot8",
-  authDomain: "filter-app-32ed4.firebaseapp.com",
-  projectId: "filter-app-32ed4",
-  storageBucket: "filter-app-32ed4.appspot.com",
-  messagingSenderId: "894848608942",
-  appId: "1:894848608942:web:57149a6147b47e019d5b3f",
-  measurementId: "G-W21YM91B45"
+  apiKey: "AIzaSyA0Upsmjz3N5-MfKcwBx4E4SGh36MoctXw",
+  authDomain: "filter-app-6c5a3.firebaseapp.com",
+  projectId: "filter-app-6c5a3",
+  storageBucket: "filter-app-6c5a3.appspot.com",
+  messagingSenderId: "98446650180",
+  appId: "1:98446650180:web:b0ad28e4e35196e0fec511",
+  measurementId: "G-C3LK4Z8P5J"
 };
 
 if (firebase.apps.length === 0) {
@@ -68,7 +68,7 @@ componentDidMount(){
         
         
                <NavigationContainer>
-               <Stack.Navigator initialRouteName='Login'>
+               <Stack.Navigator initialRouteName='Register'>
                   <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }}/>
                   <Stack.Screen name='Register' component={RegisterScreen}/>
                </Stack.Navigator>
@@ -81,9 +81,9 @@ componentDidMount(){
           <NavigationContainer >
           <Stack.Navigator initialRouteName='Profile'>
           <Stack.Screen name='Login' component={LoginScreen}/>
-          <Stack.Screen name='Profile' component={ProfileScreen}/>
-          <Stack.Screen name='Camera' component={CameraScreen}/>
-          <Stack.Screen name='Post' component={PostScreen}/>
+          <Stack.Screen name='Profile' component={ProfileScreen} />
+          <Stack.Screen name='Post' component={PostScreen} navigation ={this.props.navigation}/>
+          <Stack.Screen name='Camera' component={CameraScreen} navigation ={this.props.navigation}/>
           <Stack.Screen name='Home' component={HomeScreen}/>
 
           </Stack.Navigator>  
