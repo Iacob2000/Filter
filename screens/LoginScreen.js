@@ -40,7 +40,7 @@ import firebase from 'firebase'
                 }}/>
                
                  <Button title= 'Register' onPress = {() => {
-                      
+                        navigation.navigate('Register')
                     
                 }}
                  
