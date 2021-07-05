@@ -29,6 +29,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import CameraScreen from './screens/CameraScreen';
+import Main from './screens/Main';
 import PostScreen from './screens/PostScreen';
 const Stack =createStackNavigator();
 export default class App extends Component {
@@ -79,12 +80,13 @@ componentDidMount(){
            return(
            <Provider store={store}>
           <NavigationContainer >
-          <Stack.Navigator initialRouteName='Profile'>
+          <Stack.Navigator initialRouteName='Main'>
+          <Stack.Screen name='Home' component={HomeScreen}/>
           <Stack.Screen name='Login' component={LoginScreen}/>
           <Stack.Screen name='Profile' component={ProfileScreen} />
           <Stack.Screen name='Post' component={PostScreen} navigation ={this.props.navigation}/>
           <Stack.Screen name='Camera' component={CameraScreen} navigation ={this.props.navigation}/>
-          <Stack.Screen name='Home' component={HomeScreen}/>
+          <Stack.Screen name='Main' component={Main} navigation ={this.props.navigation}/>
 
           </Stack.Navigator>  
           </NavigationContainer>

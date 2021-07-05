@@ -1,70 +1,71 @@
-import React, { Component } from 'react';
-import {View,Button,Text,StyleSheet} from 'react-native';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {fetchUser} from '../redux/actions/index';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './HomeScreen';
-import CameraScreen  from './CameraScreen';
-import MaterialCommunityIcons from'react-native-vector-icons/MaterialCommunityIcons'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, View, Text, Image, FlatList, Button } from 'react-native'
 
+import firebase from 'firebase'
+require('firebase/firestore')
+import { connect } from 'react-redux'
 
-const Tab = createBottomTabNavigator();
-export class ProfileScreen extends Component {
-    componentDidMount() {
-        this.props.fetchUser();
+function ProfileScreen(props) {
+    const [userPosts, setUserPosts] = useState([]);
+    const [user, setUser] = useState(null);
+    const { currentUser, posts } = props;
+     console.log({currentUser,posts})
+       
+    return (
+        <View style={styles.container}>
+            <View style={styles.containerInfo}>
+            <Text>{currentUser.name}</Text>
+            <Text>{currentUser.email}</Text>
 
-    }
-    render(){
-  
-        return (
-        
-            <Tab.Navigator initialRouteName="Home" labeled={false}>
-              <Tab.Screen name="Home" component= {HomeScreen}
-               listeners= {({navigation}) =>({
-                tabPress: event =>{
-                  event.preventDefault();
-                  navigation.navigate("Home")
-                }
-              })}
-              options={{
-                tabBarIcon:({color,size}) =>(
-                  <MaterialCommunityIcons name ='home' color ={color} size={26}/>
-                )
-              }}
-              />
-        
-        <Tab.Screen name="Camera" component={CameraScreen} 
-              listeners= {({navigation}) =>({
-              tabPress: event =>{
-                event.preventDefault();
-                navigation.navigate("Camera")
-              }
-            })}
-              options={{
-                tabBarIcon:({color,size}) =>(
-                  <MaterialCommunityIcons name ='plus-box' color ={color} size={26}/>
-                )
-              }}
-          />
-              
-            </Tab.Navigator>
-             
+                
+            </View>
+
+            <View style={styles.containerGallery}>
+                <FlatList
+                    numColumns={3}
+                    horizontal={false}
+                    data={userPosts}
+                    renderItem={({ item }) => (
+                        <View
+                            style={styles.containerImage}>
+
+                            <Image
+                                style={styles.image}
+                                source={{ uri: item.downloadURL }}
+                            />
+                        </View>
+
+                    )}
+
+                />
+            </View>
+       </View>
+
     )
-    }
- 
-   
 }
-const mapStateToProps = (store) => ({
-    currentUser: store.userState.currentUser
-})
-const mapDispatchProps= (dispatch) => bindActionCreators({fetchUser},dispatch)
+
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+        flex: 1,
     },
-  });
-export default connect(mapStateToProps, mapDispatchProps)(ProfileScreen);
+    containerInfo: {
+        margin: 20
+    },
+    containerGallery: {
+        flex: 1
+    },
+    containerImage: {
+        flex: 1 / 3
+
+    },
+    image: {
+        flex: 1,
+        aspectRatio: 1 / 1
+    }
+})
+const mapStateToProps = (store) => ({
+    currentUser: store.userState.currentUser,
+    posts: store.userState.posts,
+  
+})
+export default connect(mapStateToProps, null)(ProfileScreen);
