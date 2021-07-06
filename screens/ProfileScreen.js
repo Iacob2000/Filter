@@ -8,16 +8,79 @@ import { connect } from 'react-redux'
 function ProfileScreen(props) {
     const [userPosts, setUserPosts] = useState([]);
     const [user, setUser] = useState(null);
-    const { currentUser, posts } = props;
-     console.log({currentUser,posts})
-       
+    const [following, setFollowing] = useState(false)
+
+    useEffect(() => {
+        const { currentUser, posts } = props;
+
+        if (props.route.params.uid === firebase.auth().currentUser.uid) {
+            setUser(currentUser)
+            setUserPosts(posts)
+        }
+        else {
+            firebase.firestore()
+                .collection("users")
+                .doc(props.route.params.uid)
+                .get()
+                .then((snapshot) => {
+                    if (snapshot.exists) {
+                        setUser(snapshot.data());
+                    }
+                    else {
+                        console.log('does not exist')
+                    }
+                })
+            firebase.firestore()
+                .collection("posts")
+                .doc(props.route.params.uid)
+                .collection("userPosts")
+                .orderBy("creation", "asc")
+                .get()
+                .then((snapshot) => {
+                    let posts = snapshot.docs.map(doc => {
+                        const data = doc.data();
+                        const id = doc.id;
+                        return { id, ...data }
+                    })
+                    setUserPosts(posts)
+                })
+        }
+
+        
+
+    }, [props.route.params.uid])
+
+    
+
+    if (user === null) {
+        return <View />
+    }
     return (
         <View style={styles.container}>
             <View style={styles.containerInfo}>
-            <Text>{currentUser.name}</Text>
-            <Text>{currentUser.email}</Text>
+                <Text>{user.name}</Text>
+                <Text>{user.email}</Text>
 
-                
+                {props.route.params.uid !== firebase.auth().currentUser.uid ? (
+                    <View>
+                        {following ? (
+                            <Button
+                                title="Following"
+                                onPress={() => onUnfollow()}
+                            />
+                        ) :
+                            (
+                                <Button
+                                    title="Follow"
+                                    onPress={() => onFollow()}
+                                />
+                            )}
+                    </View>
+                ) :
+                    <Button
+                        title="Logout"
+                        onPress={() => onLogout()}
+                    />}
             </View>
 
             <View style={styles.containerGallery}>
@@ -39,7 +102,7 @@ function ProfileScreen(props) {
 
                 />
             </View>
-       </View>
+        </View>
 
     )
 }
@@ -66,6 +129,6 @@ const styles = StyleSheet.create({
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser,
     posts: store.userState.posts,
-  
+    following: store.userState.following
 })
 export default connect(mapStateToProps, null)(ProfileScreen);

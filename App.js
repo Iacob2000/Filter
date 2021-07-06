@@ -31,6 +31,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import CameraScreen from './screens/CameraScreen';
 import Main from './screens/Main';
 import PostScreen from './screens/PostScreen';
+import FilterScreen from './screens/FilterScreen';
 const Stack =createStackNavigator();
 export default class App extends Component {
   constructor(props){
@@ -87,7 +88,7 @@ componentDidMount(){
           <Stack.Screen name='Post' component={PostScreen} navigation ={this.props.navigation}/>
           <Stack.Screen name='Camera' component={CameraScreen} navigation ={this.props.navigation}/>
           <Stack.Screen name='Main' component={Main} navigation ={this.props.navigation}/>
-
+          <Stack.Screen name='Filter' component={FilterScreen} navigation ={this.props.navigation}/>
           </Stack.Navigator>  
           </NavigationContainer>
     

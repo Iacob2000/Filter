@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen';
 import CameraScreen  from './CameraScreen';
 import ProfileScreen from './ProfileScreen';
+import FilterScreen from './FilterScreen';
 import firebase  from 'firebase';
 import MaterialCommunityIcons from'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -33,6 +34,19 @@ export class Main extends Component {
               options={{
                 tabBarIcon:({color,size}) =>(
                   <MaterialCommunityIcons name ='home' color ={color} size={26}/>
+                )
+              }}
+              />
+         <Tab.Screen name="Search" component= {FilterScreen}
+               listeners= {({navigation}) =>({
+                tabPress: event =>{
+                  event.preventDefault();
+                  navigation.navigate("Filter")
+                }
+              })}
+              options={{
+                tabBarIcon:({color,size}) =>(
+                  <MaterialCommunityIcons name ='magnify' color ={color} size={26}/>
                 )
               }}
               />
